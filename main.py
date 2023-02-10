@@ -27,7 +27,7 @@ def remove_image_background(image, source, nc=21):
     foreground = cv2.imread(source)
     foreground = cv2.cvtColor(foreground, cv2.COLOR_BGR2RGB)
 
-    # Match shape of R-band in RGB output map
+    # Match shape of R-band in RGB output map produced by DeepLab V3
     foreground = cv2.resize(foreground, (r.shape[1], r.shape[0]))
 
     # Create background array with white pixels
@@ -61,7 +61,7 @@ def remove_image_background(image, source, nc=21):
 def segment(net, image_path):
     image = Image.open(image_path)
 
-    # Images are resized, converted to tensors and normalized with the Imagenet specific values
+    # Images are resized, converted to tensors and normalized with the Imagenet specific mean and standard deviation
     trf = t.Compose([t.Resize(450),
                      t.ToTensor(),
                      t.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])])
