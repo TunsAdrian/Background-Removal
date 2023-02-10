@@ -17,10 +17,10 @@ def remove_image_background(image, source, nc=21):
     g = np.zeros_like(image).astype(np.uint8)
     b = np.zeros_like(image).astype(np.uint8)
 
-    # Convert each label to white
+    # Set each label beside the background to a value higher than 0
     for label in range(1, nc):
         idx = image == label
-        r[idx] = g[idx] = b[idx] = [255]
+        r[idx] = g[idx] = b[idx] = [1]
 
     rgb = np.stack([r, g, b], axis=2)
 
@@ -36,7 +36,7 @@ def remove_image_background(image, source, nc=21):
     foreground = foreground.astype(float)
     background = background.astype(float)
 
-    # Create a binary mask of the RGB output map using the threshold value 0
+    # Create a binary mask of the RGB output map using the threshold value 0 (backround value)
     th, alpha = cv2.threshold(np.array(rgb), 0, 255, cv2.THRESH_BINARY)
 
     # Apply a slight blur to the mask to soften edges
