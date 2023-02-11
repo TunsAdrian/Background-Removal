@@ -61,7 +61,7 @@ def remove_image_background(image, source, nc=21):
 def segment(net, image_path):
     image = Image.open(image_path)
 
-    # Images are resized, converted to tensors and normalized with the Imagenet specific mean and standard deviation
+    # Images are resized, converted to tensors and normalized with the DeepLab specific mean and standard deviation
     trf = t.Compose([t.Resize(450),
                      t.ToTensor(),
                      t.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])])
