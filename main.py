@@ -36,7 +36,7 @@ def remove_image_background(image, source, nc=21):
     foreground = foreground.astype(float)
     background = background.astype(float)
 
-    # Create a binary mask of the RGB output map using the threshold value 0 (backround value)
+    # Create a binary mask of the RGB output map using the threshold value 0 (background value)
     th, alpha = cv2.threshold(np.array(rgb), 0, 255, cv2.THRESH_BINARY)
 
     # Apply a slight blur to the mask to soften edges
